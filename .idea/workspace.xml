@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="318b4f51-6f34-46ae-8cb6-1bbfe85a86fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +78,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="0" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1598556930945" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602532113189">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1602532113189" />
     <state width="1286" height="223" key="GridCell.Tab.0.bottom" timestamp="1598659697754">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -114,10 +118,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602526271739" />
-    <state x="667" y="224" width="585" height="592" key="find.popup" timestamp="1602531099721">
+    <state x="667" y="224" width="585" height="592" key="find.popup" timestamp="1602532062916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="224" width="585" height="592" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602531099721" />
+    <state x="667" y="224" width="585" height="592" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602532062916" />
     <state x="346" y="49" key="search.everywhere.popup" timestamp="1598550428161">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
