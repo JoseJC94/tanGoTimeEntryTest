@@ -1,36 +1,65 @@
-//Service
+//package tarea_4_sistemas_distribuidos_JoseJC94
 
 package main
 
 import (
-    "net/http"
-    "os"
-
-    //"os"
+	"github.com/go-kit/kit/log"
+	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/gorilla/mux"
+	"net/http"
+	"os"
 )
 
-func handler(writer http.ResponseWriter, request *http.Request) {
-    var err error
-    readData("entries.csv")
-    switch request.Method {
-    case "GET":
-        err = handleGet(writer, request)
-    case "POST":
-        err = handlePost(writer, request)
-    case "PUT":
-        err = handlePut(writer, request)
-    case "DELETE":
-        err = handleDelete(writer, request)
-    }
-    writeData("entries.csv")
-    if err != nil {
-        http.Error(writer, err.Error(), http.StatusInternalServerError)
-        return
-    }
-}
-
 func main() {
-    http.HandleFunc("/entries/", handler)
-    http.ListenAndServe(":"+os.Getenv("PORT"), nil)
-    //arrayTest()
+
+	logger := log.NewLogfmtLogger(os.Stderr)
+
+	r := mux.NewRouter()
+	//var pubs, authors, entries = defaultData()
+	var svcEntry EntryService
+	svcEntry = NewEntryService(logger)
+
+	// svcEntry = loggingMiddleware{logger, svcEntry}
+	// svcEntry = instrumentingMiddleware{requestCount, requestLatency, countResult, svcEntry}
+
+	//entry
+	CreateEntryHandler := httptransport.NewServer(
+		makeCreateEntryEndpoint(svcEntry),
+		decodeCreateEntryRequest,
+		encodeResponse,
+	)
+	GetByEntryIdHandler := httptransport.NewServer(
+		makeGetEntryByIdEndpoint(svcEntry),
+		decodeGetEntryByIdRequest,
+		encodeResponse,
+	)
+
+	GetEntriesHandler := httptransport.NewServer(
+		makeGetEntriesEndpoint(svcEntry),
+		decodeGetEntriesRequest,
+		encodeResponse,
+	)
+	DeleteEntryHandler := httptransport.NewServer(
+		makeDeleteEntryEndpoint(svcEntry),
+		decodeDeleteEntryRequest,
+		encodeResponse,
+	)
+	UpdateEntryHandler := httptransport.NewServer(
+		makeUpdateEntryendpoint(svcEntry),
+		decodeUpdateEntryRequest,
+		encodeResponse,
+	)
+
+	http.Handle("/", r)
+	//http.Handle("/entry", CreateEntryHandler)
+	r.Handle("/entry", CreateEntryHandler).Methods("POST")
+	r.Handle("/entry", GetEntriesHandler).Methods("GET")
+	http.Handle("/entry/update", UpdateEntryHandler)
+	r.Handle("/entry/{entryid}", GetByEntryIdHandler).Methods("GET")
+	r.Handle("/entry/{entryid}", DeleteEntryHandler).Methods("DELETE")
+	///r.Handle("/entry", GetEntriesHandler).Methods("GET")
+
+	// http.Handle("/metrics", promhttp.Handler())
+	logger.Log("msg", "HTTP", "addr", ":"+os.Getenv("PORT"))
+	logger.Log("err", http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
