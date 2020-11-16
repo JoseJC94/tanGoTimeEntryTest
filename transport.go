@@ -67,7 +67,7 @@ func makeUpdateEntryendpoint(s EntryService) endpoint.Endpoint {
 
 func decodeCreateEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req CreateEntryRequest
-	fmt.Println("-------->>>>into Decoding")
+	//fmt.Println("-------->>>>into Decoding")
 	if err := json.NewDecoder(r.Body).Decode(&req.entry); err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func decodeCreateEntryRequest(_ context.Context, r *http.Request) (interface{}, 
 
 func decodeGetEntryByIdRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req GetEntryByIdRequest
-	fmt.Println("-------->>>>into GetById Decoding")
+	//fmt.Println("-------->>>>into GetById Decoding")
 	vars := mux.Vars(r)
 	req = GetEntryByIdRequest{
 		Id: vars["entryid"],
@@ -85,14 +85,14 @@ func decodeGetEntryByIdRequest(_ context.Context, r *http.Request) (interface{},
 }
 func decodeGetEntriesRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req GetEntriesRequest
-	fmt.Println("-------->>>>into GetById Decoding")
+	//fmt.Println("-------->>>>into GetById Decoding")
 	req = GetEntriesRequest{
 	}
 	return req, nil
 }
 
 func decodeDeleteEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	fmt.Println("-------->>>> Into Delete Decoding")
+	//fmt.Println("-------->>>> Into Delete Decoding")
 	var req DeleteEntryRequest
 	vars := mux.Vars(r)
 	req = DeleteEntryRequest{
@@ -101,7 +101,7 @@ func decodeDeleteEntryRequest(_ context.Context, r *http.Request) (interface{}, 
 	return req, nil
 }
 func decodeUpdateEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	fmt.Println("-------->>>> Into Update Decoding")
+	//fmt.Println("-------->>>> Into Update Decoding")
 	var req UpdateEntryRequest
 	if err := json.NewDecoder(r.Body).Decode(&req.entry); err != nil {
 		return nil, err

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-kit/kit/log"
 )
 
@@ -38,6 +39,8 @@ func NewEntryService(logger log.Logger) EntryService {
 func (b entrieservice) CreateEntry(ctx context.Context, entry Entry) (string, error) {
 	var msg = "success"
 	entries = append(entries, entry)
+	fmt.Println("ENTRY CREATED")
+	fmt.Println(entry)
 	return msg, nil
 }
 
@@ -50,6 +53,8 @@ func (b entrieservice) GetEntryById(ctx context.Context, id string) (interface{}
 		return empty, err
 	}
 	entry = entries[i]
+	fmt.Println("ENTRY "+id)
+	fmt.Println(entry)
 	return entry, nil
 }
 
@@ -61,6 +66,8 @@ func (b entrieservice) GetEntries(ctx context.Context) (interface{}, error) {
 		return empty, err
 	}
 	entry = entries
+	fmt.Println("ENTRIES ")
+	fmt.Println(entries)
 	return entry, nil
 }
 
@@ -73,6 +80,11 @@ func (b entrieservice) UpdateEntry(ctx context.Context, entry Entry) (string, er
 		return empty, err
 	}
 	entries[i] = entry
+	fmt.Println("ENTRY UPDATED")
+	fmt.Println("OLD ENTRY")
+	fmt.Println(entries[i])
+	fmt.Println("NEW ENTRY")
+	fmt.Println(entry)
 	return msg, nil
 }
 
@@ -83,6 +95,8 @@ func (b entrieservice) DeleteEntry(ctx context.Context, id string) (string, erro
 	if i == -1 {
 		return "", err
 	}
+	fmt.Println("ENTRY DELETED")
+	fmt.Println(entries[i])
 	copy(entries[i:], entries[i+1:])
 	entries[len(entries)-1] = Entry{}
 	entries = entries[:len(entries)-1]
