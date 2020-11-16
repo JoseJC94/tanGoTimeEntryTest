@@ -79,12 +79,12 @@ func (b entrieservice) UpdateEntry(ctx context.Context, entry Entry) (string, er
 	if i == -1 {
 		return empty, err
 	}
-	entries[i] = entry
 	fmt.Println("ENTRY UPDATED")
 	fmt.Println("OLD ENTRY")
 	fmt.Println(entries[i])
 	fmt.Println("NEW ENTRY")
 	fmt.Println(entry)
+	entries[i] = entry
 	return msg, nil
 }
 
