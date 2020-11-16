@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -13,7 +12,6 @@ import (
 
 func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	fmt.Println("into Encoding <<<<<<----------------")
 	return json.NewEncoder(w).Encode(response)
 }
 
@@ -67,7 +65,6 @@ func makeUpdateEntryendpoint(s EntryService) endpoint.Endpoint {
 
 func decodeCreateEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req CreateEntryRequest
-	//fmt.Println("-------->>>>into Decoding")
 	if err := json.NewDecoder(r.Body).Decode(&req.entry); err != nil {
 		return nil, err
 	}
@@ -76,7 +73,6 @@ func decodeCreateEntryRequest(_ context.Context, r *http.Request) (interface{}, 
 
 func decodeGetEntryByIdRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req GetEntryByIdRequest
-	//fmt.Println("-------->>>>into GetById Decoding")
 	vars := mux.Vars(r)
 	req = GetEntryByIdRequest{
 		Id: vars["entryid"],
@@ -85,14 +81,12 @@ func decodeGetEntryByIdRequest(_ context.Context, r *http.Request) (interface{},
 }
 func decodeGetEntriesRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req GetEntriesRequest
-	//fmt.Println("-------->>>>into GetById Decoding")
 	req = GetEntriesRequest{
 	}
 	return req, nil
 }
 
 func decodeDeleteEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	//fmt.Println("-------->>>> Into Delete Decoding")
 	var req DeleteEntryRequest
 	vars := mux.Vars(r)
 	req = DeleteEntryRequest{
@@ -101,7 +95,6 @@ func decodeDeleteEntryRequest(_ context.Context, r *http.Request) (interface{}, 
 	return req, nil
 }
 func decodeUpdateEntryRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	//fmt.Println("-------->>>> Into Update Decoding")
 	var req UpdateEntryRequest
 	if err := json.NewDecoder(r.Body).Decode(&req.entry); err != nil {
 		return nil, err
